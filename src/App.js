@@ -48,7 +48,6 @@ function App() {
         modal ? <Modal titles={titles} title={title}/> : null
       }
       <button onClick={fn_setTitles}>글제목배열 변경버튼</button>
-
       {/*<div className="list">*/}
       {/*  <h4 onClick={()=>{ setModal(!modal); }}>*/}
       {/*    {titles[0]}*/}
