@@ -8,6 +8,7 @@ function App() {
   let [titles, setTitles] = useState(list);
   let [good, setGood] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
+  let [ipt,setipt] = useState('');
   let fn_setTitles = ()=>{
     // 기존 state와 신규 state 를 비교하기때문에 깊은복사 조져야함
     // 참고 : Spread 문법은 1레벨 깊이만 복사
@@ -16,11 +17,11 @@ function App() {
     setTitles(a);
   }
   let [title, setTitle] = useState(0);
-
+  let logo = '블로그임';
   return (
     <div className="App">
       <div className="black-nav">
-        <h4 style={{color: 'lightgrey', fontSize: '18px'}}>블로그임</h4>
+        <h4 style={{color: 'lightgrey', fontSize: '18px'}}>{logo}</h4>
       </div>
       {
         titles.map(function(v,i){
@@ -39,14 +40,31 @@ function App() {
                 }}>👍</span> {good[i]}
               </h4>
               <p>2월 17일 발행</p>
+              <button onClick={()=>{
+                let copy= [...titles];
+                copy.splice(i,1);
+                console.log(copy);
+                setTitles(copy);
+              }}>삭제</button>
             </div>
           )
         })
       }
-
+      <input type="text" onInput={(e)=>{
+        setipt(e.target.value);
+        console.log(ipt);
+      }}/>
+      <button onClick={()=>{
+        let copy= [...titles];
+        copy.unshift(ipt);
+        setTitles(copy);
+      }}>등록</button>
+      <span>{ipt}</span>
+      <hr/>
       {
         modal ? <Modal titles={titles} title={title}/> : null
       }
+
       <button onClick={fn_setTitles}>글제목배열 변경버튼</button>
       {/*<div className="list">*/}
       {/*  <h4 onClick={()=>{ setModal(!modal); }}>*/}
